@@ -1,0 +1,22 @@
+main: me.coopersully.Core.Main
+name: Halara-Core
+version: 1.4.2
+author: Curse
+description: Adds commands and mechanics for Halara Network.
+api-version: 1.17
+prefix: Halara
+
+commands:
+  Help:
+    description: A neat, interactive chat menu with useful information.
+    aliases: [ehelp, hhelp, ?, faq]
+
+  FakeJoin:
+    description: Sends a fake player join message to the entire server.
+    aliases: [fjoin]
+    permission: group.moderator
+
+  FakeLeave:
+    description: Sends a fake player leave message to the entire server.
+    aliases: [fleave]
+    permission: group.moderator
