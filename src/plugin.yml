@@ -1,22 +1,26 @@
-main: me.coopersully.Core.Main
+main: me.coopersully.Core.HalaraCorePlugin
 name: Halara-Core
-version: 1.4.2
+version: 1.6.1
 author: Curse
 description: Adds commands and mechanics for Halara Network.
 api-version: 1.17
 prefix: Halara
 
 commands:
-  Help:
+  help:
     description: A neat, interactive chat menu with useful information.
     aliases: [ehelp, hhelp, ?, faq]
 
-  FakeJoin:
+  fakejoin:
     description: Sends a fake player join message to the entire server.
     aliases: [fjoin]
     permission: group.moderator
 
-  FakeLeave:
+  fakeleave:
     description: Sends a fake player leave message to the entire server.
     aliases: [fleave]
     permission: group.moderator
+
+  server-selector:
+    description: Opens the server selector GUI.
+    aliases: [servers, play, games, go]
