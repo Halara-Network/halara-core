@@ -12,17 +12,33 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
 
 public class HalaraCorePlugin extends JavaPlugin implements Listener {
 
+    public static String prefix;
+    public static String serverSelectorTitle;
+    public static String serverSelectorItemOneName;
+    public static List<String> serverSelectorItemOneDescription;
+    public static String serverSelectorItemTwoName;
+    public static List<String> serverSelectorItemTwoDescription;
+    public static String serverSelectorItemThreeName;
+    public static List<String> serverSelectorItemThreeDescription;
+
     public void onEnable() {
+
+        // Generate config
+        saveDefaultConfig();
+        reloadDefaultConfig();
 
         // Enable all listeners
         getServer().getPluginManager().registerEvents(this, this);
 
         // Create server_selector GUI and corresponding data
-        CoreInventories.server_selector = Bukkit.createInventory(null, 9, ChatColor.WHITE + "\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF069\uF801\uF070");
+        CoreInventories.server_selector = Bukkit.createInventory(null, 9, ChatColor.translateAlternateColorCodes('&', serverSelectorTitle));
         CoreInventories.registerServerSelector();
 
         // Register Bungeecord as a plugin channel
@@ -78,21 +94,21 @@ public class HalaraCorePlugin extends JavaPlugin implements Listener {
             // Selected survival server
             out.writeUTF("survival");
             player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHalara &r» &7Transferring you to the &aSurvival&7 server..."));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "Transferring you to the &aSurvival&7 server..."));
         }
 
         if (event.getSlot() == 13) {
             // Selected creative server
             out.writeUTF("creative");
             player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHalara &r» &7Transferring you to the &aCreative&7 server..."));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "Transferring you to the &aCreative&7 server..."));
         }
 
         if (event.getSlot() == 15) {
             // Selected prototype server
             out.writeUTF("prototype");
             player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHalara &r» &7Transferring you to the &aPrototype&7 lobby..."));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "Transferring you to the &aPrototype&7 lobby..."));
         }
 
     }
@@ -116,6 +132,38 @@ public class HalaraCorePlugin extends JavaPlugin implements Listener {
         inv.setStorageContents(oldInventory.storageContents());
 
         player.setInvulnerable(false);
+
+    }
+
+    public static void colorList(List<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            list.set(i, ChatColor.translateAlternateColorCodes('&', list.get(i)));
+        }
+    }
+
+    public static Plugin getInstance() {
+        return Bukkit.getPluginManager().getPlugin("Halara-Core");
+    }
+
+    public static void reloadDefaultConfig() {
+        getInstance().reloadConfig();
+        getInstance().saveDefaultConfig();
+
+        prefix = getInstance().getConfig().getString("prefix");
+
+        serverSelectorTitle = getInstance().getConfig().getString("server-selector.title");
+
+        serverSelectorItemOneName = getInstance().getConfig().getString("server-selector.items.1.name");
+        serverSelectorItemOneDescription = getInstance().getConfig().getStringList("server-selector.items.1.description");
+        colorList(serverSelectorItemOneDescription);
+
+        serverSelectorItemTwoName = getInstance().getConfig().getString("server-selector.items.2.name");
+        serverSelectorItemTwoDescription = getInstance().getConfig().getStringList("server-selector.items.2.description");
+        colorList(serverSelectorItemTwoDescription);
+
+        serverSelectorItemThreeName = getInstance().getConfig().getString("server-selector.items.3.name");
+        serverSelectorItemThreeDescription = getInstance().getConfig().getStringList("server-selector.items.3.description");
+        colorList(serverSelectorItemThreeDescription);
 
     }
 

@@ -1,0 +1,28 @@
+# This and all corresponding plugins' prefix when sending messages to the player.
+prefix: "&eHalara &r\u00BB &7"
+
+# Player inventories
+server-selector:
+  title: "&f\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF808\uF069\uF801\uF070"
+  items:
+    1:
+      name: "&e&lEnhanced Survival &9[1.18]"
+      description:
+        - "&7&oAn enhanced version of the survival"
+        - "&7&oexperience; collect, combat, and build."
+        - ""
+        - "&8» Click to select this server"
+    2:
+      name: "&e&lCreative &9[1.18]"
+      description:
+        - "&7&oA freestyle, sandbox gamemode in which"
+        - "&7&oplayers build to their heart's content"
+        - ""
+        - "&8» Click to select this server"
+    3:
+      name: "&e&lProtoype &9[1.17]"
+      description:
+        - "&7&oThis gamemode is currently undergoing"
+        - "&7&omaintenance; please check back later."
+        - ""
+        - "&8» Click to select this server"

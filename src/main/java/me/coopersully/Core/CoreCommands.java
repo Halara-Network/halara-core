@@ -19,20 +19,26 @@ public class CoreCommands {
     public static Map<UUID, PlayerInventoryContents> inventories = new HashMap<>();
 
     public static void sendHelpMenu(CommandSender sender) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
 
             sender.sendMessage(ChatColor.RED + "This command cannot be run through the console.");
             return;
 
         }
 
-        Player player = (Player) sender;
-
         // Header message
 
         player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Halara Network");
         player.sendMessage(ChatColor.GRAY + "Click an option below to view more information.");
-        player.sendMessage("");
+        //player.sendMessage("");
+
+
+        // Hoverable, Clickable "Change Servers" message
+
+        TextComponent server = new TextComponent(ChatColor.translateAlternateColorCodes('&', "&r     &e* &bChange Servers"));
+        server.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/play"));
+        server.setHoverEvent(new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT, new Text("Click to open the server-select menu.")));
+        player.spigot().sendMessage(server);
 
         // Hoverable, Clickable "User Agreement" message
 
@@ -87,14 +93,12 @@ public class CoreCommands {
 
     public static void fakeJoin(CommandSender sender, String[] args) {
 
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
 
             sender.sendMessage(ChatColor.RED + "This command cannot be run through the console.");
             return;
 
         }
-
-        Player player = (Player) sender;
 
         if (!(player.hasPermission("group.moderator"))) {
 
@@ -116,14 +120,13 @@ public class CoreCommands {
 
     public static void fakeLeave(CommandSender sender, String[] args) {
 
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
 
             sender.sendMessage(ChatColor.RED + "This command cannot be run through the console.");
             return;
 
         }
 
-        Player player = (Player) sender;
         if (!(player.hasPermission("group.moderator"))) {
 
             player.sendMessage(ChatColor.RED + "You do not have permission to perform this command.");
@@ -143,14 +146,13 @@ public class CoreCommands {
     }
 
     public static void openServerGUI(CommandSender sender) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
 
             sender.sendMessage(ChatColor.RED + "This command cannot be run through the console.");
             return;
 
         }
 
-        Player player = (Player) sender;
         PlayerInventory inv = player.getInventory();
 
         PlayerInventoryContents inventoryContents = new PlayerInventoryContents(inv.getArmorContents(), inv.getExtraContents(), inv.getStorageContents());

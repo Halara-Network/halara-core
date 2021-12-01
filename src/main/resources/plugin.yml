@@ -1,9 +1,9 @@
 main: me.coopersully.Core.HalaraCorePlugin
 name: Halara-Core
-version: 1.6.1
+version: 1.7
 author: Curse
 description: Adds commands and mechanics for Halara Network.
-api-version: 1.17
+api-version: 1.18
 prefix: Halara
 
 commands:
